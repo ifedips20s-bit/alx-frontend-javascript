@@ -73,8 +73,12 @@ export function executeWork(employee: Director | Teacher): string {
 }
 
 // ----------------------------
-// teachClass function without explicit type annotation
-export function teachClass(todayClass) {
+// String literal type for subjects
+export type Subjects = "Math" | "History";
+
+// ----------------------------
+// teachClass function with explicit Subjects type
+export function teachClass(todayClass: Subjects): string {
   if (todayClass === "Math") {
     return "Teaching Math";
   } else if (todayClass === "History") {
@@ -83,7 +87,7 @@ export function teachClass(todayClass) {
 }
 
 // ----------------------------
-// Example usage (for local testing only, remove before production push)
+// Example usage for local testing
 if (import.meta.url === undefined || typeof window !== "undefined") {
   const emp1 = createEmployee(200);
   const emp2 = createEmployee(1000);
