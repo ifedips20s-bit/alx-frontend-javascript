@@ -49,13 +49,13 @@ const director1: Director = {
 };
 
 // ----------------------------
-// Function interface (validator requires lowercase p)
+// Function interface
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
 // ----------------------------
-// Function implementation (plain string concatenation, no template literals)
+// Function implementation (plain string concatenation)
 function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
   return firstName[0] + ". " + lastName;
 }
