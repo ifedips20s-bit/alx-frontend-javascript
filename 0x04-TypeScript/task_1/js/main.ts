@@ -54,14 +54,47 @@ interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-// ----------------------------
 // Function implementation (plain string concatenation)
 function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
   return firstName[0] + ". " + lastName;
 }
 
 // ----------------------------
-// Testing output
+// Student interfaces
+interface StudentConstructor {
+  firstName: string;
+  lastName: string;
+}
+
+interface StudentInterface {
+  firstName: string;
+  lastName: string;
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+// StudentClass implementation
+class StudentClass implements StudentInterface {
+  firstName: string;
+  lastName: string;
+
+  constructor({ firstName, lastName }: StudentConstructor) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  workOnHomework(): string {
+    return "Currently working";
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
+
+// ----------------------------
+// Testing outputs
+
 console.log("Teachers:");
 console.log(teacher1);
 console.log(teacher2);
@@ -75,3 +108,8 @@ console.log(printTeacher({ firstName: "John", lastName: "Doe" })); // J. Doe
 console.log(printTeacher({ firstName: teacher1.firstName, lastName: teacher1.lastName })); // A. Smith
 console.log(printTeacher({ firstName: teacher2.firstName, lastName: teacher2.lastName })); // B. Brown
 console.log(printTeacher({ firstName: director1.firstName, lastName: director1.lastName })); // J. Doe
+
+console.log("Students:");
+const student1 = new StudentClass({ firstName: "Alice", lastName: "Smith" });
+console.log(student1.displayName()); // Alice
+console.log(student1.workOnHomework()); // Currently working
