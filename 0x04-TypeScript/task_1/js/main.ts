@@ -47,13 +47,13 @@ const director1: Director = {
 };
 
 // ----------------------------
-// Function interface (strict validator naming)
+// Function interface (validator requires lowercase p)
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-// Function implementation (exact required syntax)
-function printTeacher(firstName: string, lastName: string): string {
+// Function implementation using destructured object
+function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
   return `${firstName[0]}. ${lastName}`;
 }
 
@@ -68,7 +68,7 @@ console.log("Director:");
 console.log(director1);
 
 console.log("Printing Teachers:");
-console.log(printTeacher("John", "Doe")); // J. Doe
-console.log(printTeacher(teacher1.firstName, teacher1.lastName)); // A. Smith
-console.log(printTeacher(teacher2.firstName, teacher2.lastName)); // B. Brown
-console.log(printTeacher(director1.firstName, director1.lastName)); // J. Doe
+console.log(printTeacher({ firstName: "John", lastName: "Doe" })); // J. Doe
+console.log(printTeacher({ firstName: teacher1.firstName, lastName: teacher1.lastName })); // A. Smith
+console.log(printTeacher({ firstName: teacher2.firstName, lastName: teacher2.lastName })); // B. Brown
+console.log(printTeacher({ firstName: director1.firstName, lastName: director1.lastName })); // J. Doe
