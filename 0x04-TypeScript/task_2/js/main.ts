@@ -77,7 +77,7 @@ export function executeWork(employee: Director | Teacher): string {
 export type Subjects = "Math" | "History";
 
 // ----------------------------
-// teachClass function
+// teachClass function with proper type annotation
 export function teachClass(todayClass: Subjects): string {
   if (todayClass === "Math") {
     return "Teaching Math";
