@@ -8,6 +8,11 @@ interface Teacher {
   [key: string]: any;                 // allow additional properties
 }
 
+// Director interface extending Teacher
+interface Director extends Teacher {
+  numberOfReports: number;           // required attribute
+}
+
 // Examples of Teachers
 const teacher1: Teacher = {
   firstName: "Alice",
@@ -32,16 +37,6 @@ const teacher3: Teacher = {
   contract: false,   // extra attribute
 };
 
-console.log("Teachers:");
-console.log(teacher1);
-console.log(teacher2);
-console.log(teacher3);
-
-// Director interface extending Teacher
-interface Director extends Teacher {
-  numberOfReports: number;           // required attribute
-}
-
 // Example of a Director
 const director1: Director = {
   firstName: "John",
@@ -51,5 +46,29 @@ const director1: Director = {
   numberOfReports: 17,
 };
 
+// ----------------------------
+// Function interface
+interface PrintTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+// Function implementation
+const printTeacher: PrintTeacherFunction = (firstName, lastName) => {
+  return `${firstName[0]}. ${lastName}`;
+};
+
+// ----------------------------
+// Testing output
+console.log("Teachers:");
+console.log(teacher1);
+console.log(teacher2);
+console.log(teacher3);
+
 console.log("Director:");
 console.log(director1);
+
+console.log("Printing Teachers:");
+console.log(printTeacher("John", "Doe"));  // J. Doe
+console.log(printTeacher(teacher1.firstName, teacher1.lastName));  // A. Smith
+console.log(printTeacher(teacher2.firstName, teacher2.lastName));  // B. Brown
+console.log(printTeacher(director1.firstName, director1.lastName)); // J. Doe
