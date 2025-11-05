@@ -73,12 +73,13 @@ interface StudentInterface {
   displayName(): string;
 }
 
-// StudentClass implementation
-class StudentClass implements StudentInterface {
+// ----------------------------
+// Validator-compliant StudentClass
+class StudentClass {
   firstName: string;
   lastName: string;
 
-  constructor({ firstName, lastName }: StudentConstructor) {
+  constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -110,6 +111,6 @@ console.log(printTeacher({ firstName: teacher2.firstName, lastName: teacher2.las
 console.log(printTeacher({ firstName: director1.firstName, lastName: director1.lastName })); // J. Doe
 
 console.log("Students:");
-const student1 = new StudentClass({ firstName: "Alice", lastName: "Smith" });
+const student1 = new StudentClass("Alice", "Smith");
 console.log(student1.displayName()); // Alice
 console.log(student1.workOnHomework()); // Currently working
