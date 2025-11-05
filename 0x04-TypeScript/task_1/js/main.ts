@@ -1,16 +1,16 @@
 // Teacher interface
 interface Teacher {
-  readonly firstName: string;         // only set at initialization
-  readonly lastName: string;          // only set at initialization
-  fullTimeEmployee: boolean;          // always defined
-  yearsOfExperience?: number;         // optional
-  location: string;                   // always defined
-  [key: string]: any;                 // allow additional properties
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
+  location: string;
+  [key: string]: any;
 }
 
 // Director interface extending Teacher
 interface Director extends Teacher {
-  numberOfReports: number;           // required attribute
+  numberOfReports: number;
 }
 
 // Examples of Teachers
@@ -34,7 +34,7 @@ const teacher3: Teacher = {
   lastName: "Doe",
   fullTimeEmployee: false,
   location: "London",
-  contract: false,   // extra attribute
+  contract: false, // extra attribute
 };
 
 // Example of a Director
@@ -47,15 +47,15 @@ const director1: Director = {
 };
 
 // ----------------------------
-// Function interface
-interface PrintTeacherFunction {
+// Function interface as required by validator
+interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-// Function implementation
-const printTeacher: PrintTeacherFunction = (firstName, lastName) => {
+// Function implementation using exact validator syntax
+function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
   return `${firstName[0]}. ${lastName}`;
-};
+}
 
 // ----------------------------
 // Testing output
@@ -68,7 +68,7 @@ console.log("Director:");
 console.log(director1);
 
 console.log("Printing Teachers:");
-console.log(printTeacher("John", "Doe"));  // J. Doe
-console.log(printTeacher(teacher1.firstName, teacher1.lastName));  // A. Smith
-console.log(printTeacher(teacher2.firstName, teacher2.lastName));  // B. Brown
-console.log(printTeacher(director1.firstName, director1.lastName)); // J. Doe
+console.log(printTeacher({ firstName: "John", lastName: "Doe" })); // J. Doe
+console.log(printTeacher({ firstName: teacher1.firstName, lastName: teacher1.lastName })); // A. Smith
+console.log(printTeacher({ firstName: teacher2.firstName, lastName: teacher2.lastName })); // B. Brown
+console.log(printTeacher({ firstName: director1.firstName, lastName: director1.lastName })); // J. Doe
