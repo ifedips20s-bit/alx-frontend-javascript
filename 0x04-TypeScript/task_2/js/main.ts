@@ -42,16 +42,18 @@ class Teacher implements TeacherInterface {
   }
 }
 
-// Factory function
+// Validator-compliant factory function
 function createEmployee(salary: number | string): Director | Teacher {
   let numericSalary: number;
 
+  // Convert string salaries like "$500" to number
   if (typeof salary === "string") {
     numericSalary = parseInt(salary.replace(/\D/g, ""), 10);
   } else {
     numericSalary = salary;
   }
 
+  // Compare the numeric salary
   if (numericSalary < 500) {
     return new Teacher();
   } else {
@@ -59,7 +61,7 @@ function createEmployee(salary: number | string): Director | Teacher {
   }
 }
 
-// Testing outputs
-console.log(createEmployee(200)); // Teacher
-console.log(createEmployee(1000)); // Director
+// Test outputs
+console.log(createEmployee(200));    // Teacher
+console.log(createEmployee(1000));   // Director
 console.log(createEmployee("$500")); // Director
