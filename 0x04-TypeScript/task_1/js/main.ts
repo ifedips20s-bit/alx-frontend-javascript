@@ -37,13 +37,13 @@ console.log(teacher1);
 console.log(teacher2);
 console.log(teacher3);
 
-// Directors interface extending Teacher
-interface Directors extends Teacher {
+// Director interface extending Teacher
+interface Director extends Teacher {
   numberOfReports: number;           // required attribute
 }
 
 // Example of a Director
-const director1: Directors = {
+const director1: Director = {
   firstName: "John",
   lastName: "Doe",
   location: "London",
