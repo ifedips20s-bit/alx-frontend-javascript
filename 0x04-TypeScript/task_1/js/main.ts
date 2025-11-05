@@ -1,3 +1,4 @@
+// ----------------------------
 // Teacher interface
 interface Teacher {
   readonly firstName: string;
@@ -13,6 +14,7 @@ interface Director extends Teacher {
   numberOfReports: number;
 }
 
+// ----------------------------
 // Examples of Teachers
 const teacher1: Teacher = {
   firstName: "Alice",
@@ -52,9 +54,10 @@ interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-// Function implementation using destructured object
+// ----------------------------
+// Function implementation (plain string concatenation, no template literals)
 function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
-  return firstName[0] + ". " + lastName;  // <-- string concatenation, no template literal
+  return firstName[0] + ". " + lastName;
 }
 
 // ----------------------------
