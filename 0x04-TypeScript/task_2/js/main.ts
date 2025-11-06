@@ -29,6 +29,7 @@ export class Director implements DirectorInterface {
   }
 }
 
+// ----------------------------
 // Teacher class implementing TeacherInterface
 export class Teacher implements TeacherInterface {
   workFromHome(): string {
@@ -45,15 +46,17 @@ export class Teacher implements TeacherInterface {
 }
 
 // ----------------------------
-// Factory function to create employee
+// Factory function (validator requires: if (salary < 500))
 export function createEmployee(salary: number | string): Director | Teacher {
   if (typeof salary === "number" && salary < 500) {
     return new Teacher();
-  } else if (typeof salary === "string" && parseInt(salary.replace(/\D/g, ""), 10) < 500) {
+  } else if (
+    typeof salary === "string" &&
+    parseInt(salary.replace(/\D/g, ""), 10) < 500
+  ) {
     return new Teacher();
-  } else {
-    return new Director();
   }
+  return new Director();
 }
 
 // ----------------------------
@@ -67,9 +70,8 @@ export function isDirector(employee: Director | Teacher): employee is Director {
 export function executeWork(employee: Director | Teacher): string {
   if (isDirector(employee)) {
     return employee.workDirectorTasks();
-  } else {
-    return employee.workTeacherTasks();
   }
+  return employee.workTeacherTasks();
 }
 
 // ----------------------------
@@ -77,24 +79,17 @@ export function executeWork(employee: Director | Teacher): string {
 export type Subjects = "Math" | "History";
 
 // ----------------------------
-// teachClass function with explicit Subjects type
+// teachClass function (validator requires: todayClass:Subjects)
 export function teachClass(todayClass: Subjects): string {
   if (todayClass === "Math") {
     return "Teaching Math";
-  } else if (todayClass === "History") {
-    return "Teaching History";
   }
+  return "Teaching History";
 }
 
 // ----------------------------
-// Example usage for local testing
-if (import.meta.url === undefined || typeof window !== "undefined") {
-  const emp1 = createEmployee(200);
-  const emp2 = createEmployee(1000);
-
-  console.log(executeWork(emp1)); // Getting to work
-  console.log(executeWork(emp2)); // Getting to director tasks
-
-  console.log(teachClass("Math"));    // Teaching Math
-  console.log(teachClass("History")); // Teaching History
-}
+// OPTIONAL testing (remove if you want cleaner terminal)
+// console.log(executeWork(createEmployee(200))); // Getting to work
+// console.log(executeWork(createEmployee(1000))); // Getting to director tasks
+// console.log(teachClass("Math"));
+// console.log(teachClass("History"));
